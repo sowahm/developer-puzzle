@@ -1,6 +1,3 @@
-
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
 # compiled output
 /dist
 /tmp
@@ -39,4 +36,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
+<<<<<<< HEAD
 .env
+=======
+.env
+>>>>>>> 2ba31b98714f849774238eb1ea331a68ab429689
