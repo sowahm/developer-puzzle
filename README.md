@@ -1,10 +1,10 @@
 # developer-puzzle
 
 
-# Code Review for Master Branch
+## Code Review for Master Branch
 
-<h3>What is done well?<h3>
+### What is done well?
   Stocks and Stocks-api folders are seperated
   
-<h3>What would you change?<h3>
+### What would you change?
   1.
