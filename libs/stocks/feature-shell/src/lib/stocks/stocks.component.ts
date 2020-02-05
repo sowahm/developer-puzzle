@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-query';
+import { range } from 'lodash-es';
 
 @Component({
   selector: 'coding-challenge-stocks',
@@ -11,12 +12,15 @@ export class StocksComponent implements OnInit {
   stockPickerForm: FormGroup;
   symbol: string;
   period: string;
-  
+  range = 0;
+  days: number = 1000 * 60 * 60 * 24;
+
   quotes$ = this.priceQuery.priceQueries$;
 
   periodStart= new FormControl(new Date(1990, 0, 1));
   periodEnd  = new FormControl(new Date(2025, 0, 1));
-  serializedDate = new FormControl((new Date()).toISOString());
+  // serializedDate = new FormControl((new Date()).toISOString());
+  
 
   timePeriods = [
     { viewValue: 'All available data', value: 'max' },
@@ -36,7 +40,10 @@ export class StocksComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+
+  }
 
   fetchQuote() {
     if (this.stockPickerForm.valid) {
@@ -47,10 +54,15 @@ export class StocksComponent implements OnInit {
   } 
 
    DateRange(periodStart: number, periodEnd: number) {
-    let range = (periodStart - periodEnd) / 1000;
-    range /= (60 * 60 * 24 * 7);
-    return Math.abs(Math.round(range));
+    // tslint:disable-next-line: no-shadowed-variable
+   let range = (periodEnd - periodStart);
 
+    range /= (60 * 60 * 24 * 7);
+    console.log(Math.floor(range / this.days));
    }
+
+   fetchByRange(){
+      console.log(range);
+  }
 
 }

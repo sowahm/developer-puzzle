@@ -17,7 +17,7 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-label>Favorite time period</mat-label>
     <mat-select formControlName="period">
       <mat-option
@@ -27,8 +27,8 @@
         {{ timePeriod.viewValue }}
       </mat-option>
     </mat-select>
-  </mat-form-field>
-  <div>Or</div><br >
+  </mat-form-field> -->
+  
 
   <div>
     <mat-form-field>
@@ -40,8 +40,9 @@
   <mat-form-field>
     <input matInput  [value]="PeriodEnd" [matDatepicker]="picker2" placeholder="To" [formControl]="periodEnd">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2  (click)="fetchQuote()"></mat-datepicker>
+    <mat-datepicker #picker2 ></mat-datepicker>
 </mat-form-field> 
-</form>
+<button (click)="DateRange()" mat-raised-button>Go</button>
 
+</form>
 <coding-challenge-chart [data$]="quotes$"></coding-challenge-chart>
