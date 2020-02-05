@@ -22,12 +22,27 @@
     <mat-select formControlName="period">
       <mat-option
         *ngFor="let timePeriod of timePeriods"
-        [value]="timePeriod.value" (click)="fetchQuote()"
+        [value]="timePeriod.value" (click)="fetchQuote()" 
       >
         {{ timePeriod.viewValue }}
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <div>Or</div><br >
+  <div>
+    <mat-form-field>
+      <input matInput [value]="PeriodStart" [matDatepicker]="picker1" placeholder="From" [formControl]="periodStart">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field> 
+  </div>
+ 
+  <mat-form-field>
+        <input matInput  [value]="PeriodEnd" [matDatepicker]="picker2" placeholder="To" [formControl]="periodEnd">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2  (click)="fetchQuote()"></mat-datepicker>
+</mat-form-field> 
+
 
 </form>
 
