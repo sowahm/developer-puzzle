@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-query';
 
 @Component({
@@ -13,6 +13,10 @@ export class StocksComponent implements OnInit {
   period: string;
 
   quotes$ = this.priceQuery.priceQueries$;
+  dateFrom = new FormControl(new Date());
+  dateTo = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
+  serializedTo = new FormControl((new Date()).toISOString());
 
   timePeriods = [
     { viewValue: 'All available data', value: 'max' },
