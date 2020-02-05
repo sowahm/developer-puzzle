@@ -11,3 +11,6 @@
 ### What would you change?
 1. I would change the folder structure to multiple-module architecture.
 2. I would also look into syntax conventions and application structure.
+3. Material in its own Module
+4. Routing in its own module
+5. ngrx refactor
