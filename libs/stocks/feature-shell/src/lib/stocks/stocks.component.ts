@@ -12,13 +12,11 @@ export class StocksComponent implements OnInit {
   symbol: string;
   period: string;
   
-
- 
   quotes$ = this.priceQuery.priceQueries$;
+
   periodStart= new FormControl(new Date(1990, 0, 1));
   periodEnd  = new FormControl(new Date(2025, 0, 1));
   serializedDate = new FormControl((new Date()).toISOString());
-  
 
   timePeriods = [
     { viewValue: 'All available data', value: 'max' },
