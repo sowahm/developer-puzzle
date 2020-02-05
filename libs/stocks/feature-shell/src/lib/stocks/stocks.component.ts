@@ -11,12 +11,14 @@ export class StocksComponent implements OnInit {
   stockPickerForm: FormGroup;
   symbol: string;
   period: string;
+  
 
+ 
   quotes$ = this.priceQuery.priceQueries$;
-  dateFrom = new FormControl(new Date());
-  dateTo = new FormControl(new Date());
+  periodStart= new FormControl(new Date(1990, 0, 1));
+  periodEnd  = new FormControl(new Date(2025, 0, 1));
   serializedDate = new FormControl((new Date()).toISOString());
-  serializedTo = new FormControl((new Date()).toISOString());
+  
 
   timePeriods = [
     { viewValue: 'All available data', value: 'max' },
@@ -32,7 +34,7 @@ export class StocksComponent implements OnInit {
   constructor(private fb: FormBuilder, private priceQuery: PriceQueryFacade) {
     this.stockPickerForm = fb.group({
       symbol: [null, Validators.required],
-      period: [null, Validators.required]
+      period: [null, Validators.required],
     });
   }
 
@@ -40,8 +42,17 @@ export class StocksComponent implements OnInit {
 
   fetchQuote() {
     if (this.stockPickerForm.valid) {
-      const { symbol, period } = this.stockPickerForm.value;
+      const { symbol, period} = this.stockPickerForm.value;
       this.priceQuery.fetchQuote(symbol, period);
-    }
-  }
+    } 
+    
+  } 
+
+   DateRange(periodStart: number, periodEnd: number) {
+    let range = (periodStart - periodEnd) / 1000;
+    range /= (60 * 60 * 24 * 7);
+    return Math.abs(Math.round(range));
+
+   }
+
 }
