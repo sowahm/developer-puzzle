@@ -11,14 +11,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NxModule } from '@nrwl/nx';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     CommonModule,
-    HttpClientModule,
     RouterModule.forRoot([
       {
         path: '',
