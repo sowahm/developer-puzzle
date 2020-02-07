@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-query';
-import { range } from 'lodash-es';
+
 
 @Component({
   selector: 'coding-challenge-stocks',
@@ -12,15 +12,20 @@ export class StocksComponent implements OnInit {
   stockPickerForm: FormGroup;
   symbol: string;
   period: string;
-  range = 0;
-  days: number = 1000 * 60 * 60 * 24;
-
+ 
   quotes$ = this.priceQuery.priceQueries$;
 
-  periodStart= new FormControl(new Date(1990, 0, 1));
-  periodEnd  = new FormControl(new Date(2025, 0, 1));
-  // serializedDate = new FormControl((new Date()).toISOString());
-  
+  minDate = new Date(2000, 0, 1);
+  maxDate = new Date();
+
+  Dfrom = new FormControl(new Date());
+  Dto  = new FormControl(new Date());
+  setting ={
+    format: 'MM-dd-yyyy'
+  }
+  serializedDate = new FormControl((new Date()).toISOString());
+
+   dperiod = 7 - 5;
 
   timePeriods = [
     { viewValue: 'All available data', value: 'max' },
@@ -32,37 +37,36 @@ export class StocksComponent implements OnInit {
     { viewValue: 'Three months', value: '3m' },
     { viewValue: 'One month', value: '1m' }
   ];
+  rangeFilter: any;
+  getData: any;
 
-  constructor(private fb: FormBuilder, private priceQuery: PriceQueryFacade) {
+  constructor(fb: FormBuilder, private priceQuery: PriceQueryFacade) {
     this.stockPickerForm = fb.group({
       symbol: [null, Validators.required],
       period: [null, Validators.required],
     });
   }
 
-  ngOnInit() {
-    
+  ngOnInit() {}
 
-  }
 
+ 
   fetchQuote() {
     if (this.stockPickerForm.valid) {
       const { symbol, period} = this.stockPickerForm.value;
       this.priceQuery.fetchQuote(symbol, period);
+      
     } 
-    
+    console.log((this.Dto.value.getTime() - this.Dfrom.value.getTime()));
+
   } 
+ 
 
-   DateRange(periodStart: number, periodEnd: number) {
-    // tslint:disable-next-line: no-shadowed-variable
-   let range = (periodEnd - periodStart);
-
-    range /= (60 * 60 * 24 * 7);
-    console.log(Math.floor(range / this.days));
-   }
-
-   fetchByRange(){
-      console.log(range);
-  }
+    Drange(Dto: { getTime: () => number; }, Dfrom: { getTime: () => number; }){
+       let diff = (Dto.getTime() - Dfrom.getTime()) / 1000;
+        diff /= (60 * 60 * 24)
+        return Math.abs(Math.round(diff/365.25))
+    }
+   
 
 }

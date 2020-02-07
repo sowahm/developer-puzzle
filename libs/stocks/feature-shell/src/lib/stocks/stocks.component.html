@@ -30,19 +30,24 @@
   </mat-form-field> -->
   
 
-  <div>
-    <mat-form-field>
-      <input matInput [value]="PeriodStart" [matDatepicker]="picker1" placeholder="From" [formControl]="periodStart">
-      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
+ 
+<mat-form-field>
+      <input matInput [value] = "from" [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="From" [formControl]="Dfrom">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker ></mat-datepicker>
+      
 </mat-form-field> 
-  </div>
+ 
   <mat-form-field>
-    <input matInput  [value]="PeriodEnd" [matDatepicker]="picker2" placeholder="To" [formControl]="periodEnd">
+    <input matInput  [value] = "to" [min]="minDate" [max]="maxDate"  [matDatepicker]="picker2" placeholder="To" [formControl]="Dto">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2 ></mat-datepicker>
 </mat-form-field> 
-<button (click)="DateRange()" mat-raised-button>Go</button>
+<button  (click)="fetchQuote()" mat-raised-button>Go</button>
 
 </form>
 <coding-challenge-chart [data$]="quotes$"></coding-challenge-chart>
+{{this.Dfrom.value}} <br >
+{{this.Dto.value}}
+
+

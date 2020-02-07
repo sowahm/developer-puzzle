@@ -21,4 +21,5 @@ export class PriceQueryFacade {
   fetchQuote(symbol: string, period: string) {
     this.store.dispatch(new FetchPriceQuery(symbol, period));
   }
+  
 }
