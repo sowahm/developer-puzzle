@@ -20,14 +20,14 @@
 
  
 <mat-form-field>
-      <input matInput [value] = "from" [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="From" [formControl]="Dfrom">
+      <input matInput  [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="From" [formControl]="Dfrom">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker ></mat-datepicker>
       
 </mat-form-field> 
  
   <mat-form-field>
-    <input matInput  [value] = "to" [min]="minDate" [max]="maxDate"  [matDatepicker]="picker2" placeholder="To" [formControl]="Dto">
+    <input matInput   [min]="minDate" [max]="maxDate"  [matDatepicker]="picker2" placeholder="To" [formControl]="Dto">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2 ></mat-datepicker>
 </mat-form-field> 
@@ -37,5 +37,3 @@
 <coding-challenge-chart [data$]="quotes$"></coding-challenge-chart>
 {{this.Dfrom.value}} <br >
 {{this.Dto.value}}
-
-
