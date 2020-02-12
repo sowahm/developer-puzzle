@@ -12,20 +12,17 @@ export class StocksComponent implements OnInit {
   stockPickerForm: FormGroup;
   symbol: string;
   period: string;
- 
   quotes$ = this.priceQuery.priceQueries$;
 
   minDate = new Date(2000, 0, 1);
   maxDate = new Date();
 
+
   Dfrom = new FormControl(new Date());
   Dto  = new FormControl(new Date());
-  setting ={
-    format: 'MM-dd-yyyy'
-  }
+ 
   serializedDate = new FormControl((new Date()).toISOString());
 
-   dperiod = 7 - 5;
 
   timePeriods = [
     { viewValue: 'All available data', value: 'max' },
@@ -57,15 +54,14 @@ export class StocksComponent implements OnInit {
       this.priceQuery.fetchQuote(symbol, period);
       
     } 
-    console.log((this.Dto.value.getTime() - this.Dfrom.value.getTime()));
-
+  
+  console.log(Math.floor((Date.UTC(this.Dto.value.getFullYear(), this.Dto.value.getMonth(), this.Dto.value.getDate()) - Date.UTC(this.Dfrom.value.getFullYear(), this.Dfrom.value.getMonth(), this.Dfrom.value.getDate()) ) /(1000 * 60 * 60 * 24)));
   } 
  
 
-    Drange(Dto: { getTime: () => number; }, Dfrom: { getTime: () => number; }){
-       let diff = (Dto.getTime() - Dfrom.getTime()) / 1000;
-        diff /= (60 * 60 * 24)
-        return Math.abs(Math.round(diff/365.25))
+    Drange({ Dto, Dfrom }: { Dto: any; Dfrom: any; }){
+      
+      return Math.floor((Date.UTC(Dto.getFullYear(), Dto.getMonth(), Dto.getDate()) - Date.UTC(Dfrom.getFullYear(), Dfrom.getMonth(), Dfrom.getDate()) ) /(1000 * 60 * 60 * 24));
     }
    
 
