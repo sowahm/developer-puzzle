@@ -6,7 +6,8 @@ import {
   MatSelectModule,
   MatButtonModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatDatepickerInputEvent
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { SharedUiChartModule } from '@coding-challenge/shared/ui/chart';
