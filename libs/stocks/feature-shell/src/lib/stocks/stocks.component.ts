@@ -25,7 +25,7 @@ export class StocksComponent implements OnInit {
   timePeriods: any[];
   D_from: any;
   D_to: any;
-
+  diff: any;
   quotes$ = this.priceQuery.priceQueries$;
 
   minDate = new Date(2000, 0, 1);
@@ -45,27 +45,64 @@ export class StocksComponent implements OnInit {
   //   { viewValue: 'Three months', value: '3m' },
   //   { viewValue: 'One month', value: '1m' }
   // ];
-  // tslint:disable-next-line: member-ordering
+
   rangeFilter: any;
   getData: any;
+  public total_months = (this.Dto.value.getFullYear() - this.Dfrom.value.getFullYear())*12 + (this.Dto.value.getMonth() - this.Dfrom.value.getMonth())
+  
 
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.events.push(`${type}: ${event.value}`);
-    this.Drange = (Math.floor((Date.UTC(this.Dto.value.getFullYear(), this.Dto.value.getMonth(), this.Dto.value.getDate()) - Date.UTC(this.Dfrom.value.getFullYear(), this.Dfrom.value.getMonth(), this.Dfrom.value.getDate()) ) /(1000 * 60 * 60 * 24)));
-    console.log(this.Drange); 
-    if (this.Drange > 500) {
-      console.log(this.timePeriods)
-      this.timePeriods = [{viewValue: 'All available data', value: 'max' }]
-    } else if
-     (this.Drange < 500 ) {
-      console.log(this.timePeriods)
-      this.timePeriods = [{viewValue: 'All available data', value: '5y' }]
-    }
+  ngOnInit() {
+    this.CalculateTimePeriod();
   }
 
-  ngOnInit() {}
+  CalculateTimePeriod(){
+    this.Drange = (Math.floor((Date.UTC(this.Dto.value.getFullYear(), this.Dto.value.getMonth(), this.Dto.value.getDate()) - Date.UTC(this.Dfrom.value.getFullYear(), this.Dfrom.value.getMonth(), this.Dfrom.value.getDate()) ) /(1000 * 60 * 60 * 24)));
+    console.log(this.Drange); 
+    console.log(this.total_months);
 
+    if (this.Drange > 500) {
+      this.timePeriods = [{viewValue: 'All available data', value: 'max' }]
+
+      console.log(this.timePeriods)
+
+    } else 
+      if (this.Drange < 500 ) {
+        this.timePeriods = [{viewValue: 'Five years', value: '5y' }]
+        console.log(this.timePeriods)
   
+      }
+        
+      else 
+        if (this.Drange < 500){
+          this.timePeriods = [{viewValue: 'One years', value: '1y' }]
+          console.log(this.timePeriods)
+        }
+      
+      else 
+        if (this.Drange < 500){
+          this.timePeriods = [{viewValue: 'Year-to-date', value: 'ytd' }]
+          console.log(this.timePeriods)
+        }
+      
+      else 
+        if (this.Drange < 500){
+          this.timePeriods = [{viewValue: 'Six Months', value: '6m' }]
+          console.log(this.timePeriods)
+        }
+      
+      else 
+        if (this.Drange < 500){
+          this.timePeriods = [{viewValue: 'Three Months', value: '3m' }]
+          console.log(this.timePeriods)
+        }
+      
+      else 
+        if (this.Drange < 500){
+          this.timePeriods = [{viewValue: 'One Months', value: '1m' }]
+          console.log(this.timePeriods)
+        }
+      
+  }
  
   fetchQuote() {
     if (this.stockPickerForm.valid) {
